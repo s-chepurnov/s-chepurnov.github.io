@@ -53,6 +53,8 @@
           updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
           authorizeButton.onclick = handleAuthClick;
           signoutButton.onclick = handleSignoutClick;
+		  
+		  listMajors();
         });
       }
 
@@ -100,24 +102,32 @@
       /**
        * Print the names and majors of students in a sample spreadsheet:
        * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+	   * https://docs.google.com/spreadsheets/d/10VxZNjNi8xPxvGZt4p0I_2LL8iD-y_dykLCniF6LIig/edit
        */
       function listMajors() {
         gapi.client.sheets.spreadsheets.values.get({
-          spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
-          range: 'Class Data!A2:E',
+          spreadsheetId: '10VxZNjNi8xPxvGZt4p0I_2LL8iD-y_dykLCniF6LIig',
+          range: 'Goods!A2:C',
         }).then(function(response) {
-          var range = response.result;
-          if (range.values.length > 0) {
-            appendPre('Name, Major:');
+			console.log(response);
+			var range = response.result;
+			if (range.values.length > 0) {
+            appendPre('https://docs.google.com/spreadsheets/d/10VxZNjNi8xPxvGZt4p0I_2LL8iD-y_dykLCniF6LIig/edit');
             for (i = 0; i < range.values.length; i++) {
               var row = range.values[i];
-              // Print columns A and E, which correspond to indices 0 and 4.
-              appendPre(row[0] + ', ' + row[4]);
+			  /*for (j=0; j < range.values[i].length; j++) {
+				  // Print all columns
+				  appendPre(row[j]);
+				  appendPre(' ');
+			  }*/
+			  appendPre(range.values[i].toString());
+              
             }
           } else {
             appendPre('No data found.');
           }
         }, function(response) {
+			console.log(response);
           appendPre('Error: ' + response.result.error.message);
         });
       }
