@@ -1,4 +1,4 @@
-package hexlet.code.blog;
+package hexlet.code;
 
 import org.junit.jupiter.api.Test;
 
