@@ -1,6 +1,7 @@
-package hexlet.code;
+package hexlet.code.blog;
 
 class App {
+
     public static void main(String[] args) {
         System.out.println("hello");
     }
