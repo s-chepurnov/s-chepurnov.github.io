@@ -6,7 +6,8 @@ class App {
 
     public static void main(String[] args) {
         Javalin app = getApp();
-        app.start(7070);
+        final int port = 7070;
+        app.start(port);
     }
 
     public static Javalin getApp() {
