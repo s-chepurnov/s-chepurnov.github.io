@@ -1,25 +1,23 @@
 package hexlet.code.model;
 
 import io.ebean.Model;
+import io.ebean.annotation.WhenCreated;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.time.Instant;
-import java.util.Random;
 
 @Entity
-public class Url extends Model {
+public final class Url extends Model {
 
     @Id
-    long id;
+    private long id;
+    private String name;
+    @WhenCreated
+    private Instant createdAt;
 
-    String name;
-    Instant createdAt;
-
-    public Url(String name) {
-        this.name = name;
-        this.id = new Random().nextLong();
-        createdAt = Instant.now();
+    public Url(String urlName) {
+        this.name = urlName;
     }
 
     public long getId() {
@@ -32,5 +30,17 @@ public class Url extends Model {
 
     public Instant getCreatedAt() {
         return createdAt;
+    }
+
+    public void setId(long urlId) {
+        this.id = urlId;
+    }
+
+    public void setName(String urlName) {
+        this.name = urlName;
+    }
+
+    public void setCreatedAt(Instant instant) {
+        this.createdAt = instant;
     }
 }

@@ -1,6 +1,12 @@
 package hexlet.code;
 
+import hexlet.code.controllers.RootController;
 import io.javalin.Javalin;
+import io.javalin.plugin.rendering.template.JavalinThymeleaf;
+import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 class App {
 
@@ -10,8 +16,8 @@ class App {
     }
 
     private static void addRoutes(Javalin app) {
-        app.get("/", ctx -> ctx.result("Hello World"));
-//        app.get("/about", RootController.about);
+        //app.get("/", ctx -> ctx.result("Hello World"));
+        app.get("/", RootController.getIndex());
 
 //        app.routes(() -> {
 //            path("articles", () -> {
@@ -31,7 +37,7 @@ class App {
                 config.enableDevLogging();
             }
             config.enableWebjars();
-            //JavalinThymeleaf.configure(getTemplateEngine());
+            JavalinThymeleaf.configure(getTemplateEngine());
         });
 
         addRoutes(app);
@@ -44,7 +50,7 @@ class App {
 
     private static int getPort() {
         String port = System.getenv().getOrDefault("PORT", "8080");
-        return Integer.valueOf(port);
+        return Integer.parseInt(port);
     }
 
     private static String getMode() {
@@ -53,6 +59,19 @@ class App {
 
     private static boolean isProduction() {
         return getMode().equals("production");
+    }
+
+    private static TemplateEngine getTemplateEngine() {
+        TemplateEngine templateEngine = new TemplateEngine();
+
+        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+        templateResolver.setPrefix("/templates/");
+
+        templateEngine.addTemplateResolver(templateResolver);
+        templateEngine.addDialect(new LayoutDialect());
+        templateEngine.addDialect(new Java8TimeDialect());
+
+        return templateEngine;
     }
 
 }
