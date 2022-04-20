@@ -2,16 +2,13 @@ package hexlet.code;
 
 import hexlet.code.controllers.RootController;
 import hexlet.code.controllers.UrlController;
-import hexlet.code.model.Url;
-import hexlet.code.model.query.QUrl;
+
 import io.javalin.Javalin;
 import io.javalin.plugin.rendering.template.JavalinThymeleaf;
 import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-
-import java.util.List;
 
 import static io.javalin.apibuilder.ApiBuilder.path;
 import static io.javalin.apibuilder.ApiBuilder.get;
@@ -22,18 +19,6 @@ class App {
     public static void main(String[] args) {
         Javalin app = getApp();
         app.start(getPort());
-
-//        List<Url> all = new QUrl().findList();
-//        for (Url one : all) {
-//            one.delete();
-//        }
-
-        //insert into development DB H2
-//        new Url("https://www.example.com").save();
-//        new Url("https://www.google.com").save();
-//        new Url("https://www.amazon.com").save();
-//        new Url("https://www.yandex.ru").save();
-//        new Url("https://www.hexlet.io").save();
     }
 
     private static void addRoutes(Javalin app) {
