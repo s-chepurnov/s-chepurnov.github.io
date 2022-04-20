@@ -53,6 +53,9 @@ dependencies {
     testImplementation 'org.assertj:assertj-core:3.22.0'
     testImplementation 'io.ebean:ebean-test:12.15.1'
     testImplementation 'com.konghq:unirest-java:3.13.6'
+
+    //testImplementation 'org.mockito:mockito-inline:3.12.4'
+    //testImplementation 'org.mockito:mockito-junit-jupiter:3.12.4'
 }
 
 test {
