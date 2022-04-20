@@ -59,7 +59,6 @@ class AppTest {
             assertThat(response.getStatus()).isEqualTo(successStatus);
             assertThat(response.getBody()).contains("Анализатор страниц");
         }
-
     }
 
     @Nested
