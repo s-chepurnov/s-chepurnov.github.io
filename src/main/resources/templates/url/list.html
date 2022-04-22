@@ -46,8 +46,8 @@
                 <tr th:each="url : ${urls}">
                     <td><span class="col-1" th:text="${url.id}"></span></td>
                     <td><a th:href="@{/urls/{id}(id=${url.id})}"><span th:text="${url.name}"></span></a></td>
-                    <td><span class="col-2" th:if="${url.urlCheck.size} gt 0" th:text="${#temporals.format(url.urlCheck[url.urlCheck.size-1].createdAt, 'dd-MM-yyyy HH:mm')}"></span></td>
-                    <td><span class="col-1" th:if="${url.urlCheck.size} gt 0" th:text="${url.urlCheck[url.urlCheck.size-1].statusCode}"></span></td>
+                    <td><span class="col-2" th:if="${!url.urlCheck.empty}" th:text="${#temporals.format(url.urlCheck[url.urlCheck.size-1].createdAt, 'dd-MM-yyyy HH:mm')}"></span></td>
+                    <td><span class="col-1" th:if="${!url.urlCheck.empty}" th:text="${url.urlCheck[url.urlCheck.size-1].statusCode}"></span></td>
                 </tr>
             </tbody>
             </table>

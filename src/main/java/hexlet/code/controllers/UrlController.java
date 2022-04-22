@@ -10,6 +10,7 @@ import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.net.URL;
@@ -115,16 +116,16 @@ public final class UrlController {
         HttpResponse<String> response = Unirest.get(urlStr).asString();
         String html = response.getBody();
         Document doc = Jsoup.parse(html);
-        Elements title = doc.getElementsByTag("title");
-        Elements meta = doc.getElementsByTag("meta");
+
+        String title = doc.title();
         Elements h1 = doc.getElementsByTag("h1");
+        Element meta = doc.selectFirst("meta[name=description]");
 
         urlCheck.setUrl(dbUrl);
         urlCheck.setStatusCode(response.getStatus());
-        urlCheck.setTitle(title.hasText() ? title.text() : "");
+        urlCheck.setTitle(title);
         urlCheck.setH1(h1.hasText() ? h1.text() : "");
-        boolean isDsc = meta.hasAttr("description") && meta.hasAttr("content");
-        urlCheck.setDescription(isDsc ? meta.attr("content") : "");
+        urlCheck.setDescription(meta != null && meta.hasAttr("content") ? meta.attr("content") : "");
         urlCheck.save();
 
         ctx.attribute("url", dbUrl);

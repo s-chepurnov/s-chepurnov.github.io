@@ -68,7 +68,10 @@
                         <td><span th:text="${check.statusCode}"></span></td>
                         <td><span th:text="${check.title}"></span></td>
                         <td><span th:text="${check.h1}"></span></td>
-                        <td><span th:text="${check.description}"></span></td>
+                        <td>
+                            <span th:if="${check.description.length >= 100}" th:text="${#strings.substring(check.description, 0, 100)}"></span>
+                            <span th:if="${check.description.length < 100 }" th:text="${check.description}"></span>
+                        </td>
                         <td><span class="col-2" th:text="${#temporals.format(check.createdAt, 'dd-MM-yyyy HH:mm')}"></span></td>
                     </tr>
                 </tbody>
