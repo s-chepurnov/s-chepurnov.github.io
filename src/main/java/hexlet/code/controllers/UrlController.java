@@ -123,7 +123,8 @@ public final class UrlController {
         urlCheck.setStatusCode(response.getStatus());
         urlCheck.setTitle(title.hasText() ? title.text() : "");
         urlCheck.setH1(h1.hasText() ? h1.text() : "");
-        urlCheck.setDescription(meta.hasAttr("description") ? meta.attr("description") : "");
+        boolean isDsc = meta.hasAttr("description") && meta.hasAttr("content");
+        urlCheck.setDescription(isDsc ? meta.attr("content") : "");
         urlCheck.save();
 
         ctx.attribute("url", dbUrl);

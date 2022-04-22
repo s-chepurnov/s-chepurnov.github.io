@@ -28,55 +28,55 @@ public final class UrlCheck extends Model {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int idUrlCheck) {
+        this.id = idUrlCheck;
     }
 
     public int getStatusCode() {
         return statusCode;
     }
 
-    public void setStatusCode(int statusCode) {
-        this.statusCode = statusCode;
+    public void setStatusCode(int statusCodeUrlCheck) {
+        this.statusCode = statusCodeUrlCheck;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitle(String titleUrlCheck) {
+        this.title = titleUrlCheck;
     }
 
     public String getH1() {
         return h1;
     }
 
-    public void setH1(String h1) {
-        this.h1 = h1;
+    public void setH1(String h1UrlCheck) {
+        this.h1 = h1UrlCheck;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescription(String descriptionUrlCheck) {
+        this.description = descriptionUrlCheck;
     }
 
     public Url getUrl() {
         return url;
     }
 
-    public void setUrl(Url url) {
-        this.url = url;
+    public void setUrl(Url urlUrlCheck) {
+        this.url = urlUrlCheck;
     }
 
     public Instant getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
+    public void setCreatedAt(Instant instant) {
+        this.createdAt = instant;
     }
 }

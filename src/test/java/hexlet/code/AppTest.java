@@ -131,9 +131,9 @@ class AppTest {
             String html = Files.readString(Path.of(htmlFile));
             server.enqueue(new MockResponse().setBody(html));
 
-            HttpUrl baseUrl = server.url("/urls/1/checks");
+            HttpUrl mockUrl = server.url("/urls/1/checks");
             HttpResponse<String> response = Unirest
-                    .post(baseUrl.toString())
+                    .post(mockUrl.toString())
                     .asString();
             String body = response.getBody();
 
