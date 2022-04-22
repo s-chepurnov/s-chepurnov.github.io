@@ -1,10 +1,16 @@
 package hexlet.code.controllers;
 
 import hexlet.code.model.Url;
+import hexlet.code.model.UrlCheck;
 import hexlet.code.model.query.QUrl;
 import io.ebean.PagedList;
 import io.javalin.http.Handler;
 import io.javalin.http.NotFoundResponse;
+import kong.unirest.HttpResponse;
+import kong.unirest.Unirest;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 import java.net.URL;
 import java.util.List;
@@ -50,12 +56,8 @@ public final class UrlController {
                 .collect(Collectors.toList());
 
         ctx.attribute("pages", pages);
+        ctx.attribute("pages", pages);
         ctx.attribute("currentPage", currentPage);
-
-        //without pagination
-        //List<Url> dbUrls = new QUrl()
-        //.findList();
-
         ctx.attribute("urls", dbUrls);
         ctx.render("url/list.html");
     };
@@ -96,6 +98,38 @@ public final class UrlController {
         ctx.render("/index.html");
     };
 
+    private static Handler check = ctx -> {
+        int id = ctx.pathParamAsClass("id", Integer.class).getOrDefault(null);
+
+        UrlCheck urlCheck = new UrlCheck();
+        Url dbUrl = new QUrl()
+                .id.equalTo(id)
+                .findOne();
+
+        if (dbUrl == null) {
+            throw new NotFoundResponse();
+        }
+
+        String urlStr = dbUrl.getName();
+
+        HttpResponse<String> response = Unirest.get(urlStr).asString();
+        String html = response.getBody();
+        Document doc = Jsoup.parse(html);
+        Elements title = doc.getElementsByTag("title");
+        Elements meta = doc.getElementsByTag("meta");
+        Elements h1 = doc.getElementsByTag("h1");
+
+        urlCheck.setUrl(dbUrl);
+        urlCheck.setStatusCode(response.getStatus());
+        urlCheck.setTitle(title.hasText() ? title.text() : "");
+        urlCheck.setH1(h1.hasText() ? h1.text() : "");
+        urlCheck.setDescription(meta.hasAttr("description") ? meta.attr("description") : "");
+        urlCheck.save();
+
+        ctx.attribute("url", dbUrl);
+        ctx.render("url/show.html");
+    };
+
     public static Handler listUrl() {
         return list;
     }
@@ -108,4 +142,7 @@ public final class UrlController {
         return show;
     }
 
+    public static Handler checkUrl() {
+        return check;
+    }
 }

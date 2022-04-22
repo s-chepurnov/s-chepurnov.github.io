@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -29,48 +29,48 @@
 
     <section>
         <div class="container-lg mt-5">
-            <h1>Сайт <span th:text="${url.name}"></span></h1>
+            <h1>Сайт <span>https://www.example.com</span></h1>
 
             <table class="table table-bordered table-hover mt-3">
                 <tbody>
                 <tr>
                     <td>ID</td>
-                    <td><span th:text="${url.id}"></span></td>
+                    <td><span>1</span></td>
                 </tr>
                 <tr>
                     <td>Имя</td>
-                    <td><span th:text="${url.name}"></span></td>
+                    <td><span>https://www.example.com</span></td>
                 </tr>
                 <tr>
                     <td>Дата создания</td>
-                    <td><span class="col-2" th:text="${#temporals.format(url.createdAt, 'dd-MM-yyyy HH:mm')}"></span></td>
+                    <td><span class="col-2">22-04-2022 14:21</span></td>
                 </tr>
                 </tbody>
             </table>
 
             <h2 class="mt-5">Проверки</h2>
-            <form method="post" th:action="@{/urls/{id}/checks(id=${url.id})}">
+            <form method="post" action="/urls/1/checks">
                 <button type="submit" class="btn btn-primary">Запустить проверку</button>
             </form>
 
             <table class="table table-bordered table-hover mt-3">
                 <thead>
-                    <th class="col-1">ID</th>
-                    <th class="col-1">Код ответа</th>
-                    <th>title</th>
-                    <th>h1</th>
-                    <th>description</th>
-                    <th class="col-2">Дата проверки</th>
+                <th class="col-1">ID</th>
+                <th class="col-1">Код ответа</th>
+                <th>title</th>
+                <th>h1</th>
+                <th>description</th>
+                <th class="col-2">Дата проверки</th>
                 </thead>
                 <tbody>
-                    <tr th:each="check : ${url.urlCheck}">
-                        <td><span class="col-1" th:text="${check.id}"></span></td>
-                        <td><span th:text="${check.statusCode}"></span></td>
-                        <td><span th:text="${check.title}"></span></td>
-                        <td><span th:text="${check.h1}"></span></td>
-                        <td><span th:text="${check.description}"></span></td>
-                        <td><span class="col-2" th:text="${#temporals.format(check.createdAt, 'dd-MM-yyyy HH:mm')}"></span></td>
-                    </tr>
+                <tr>
+                    <td><span class="col-1">1</span></td>
+                    <td><span>200</span></td>
+                    <td><span>Example Domain</span></td>
+                    <td><span>Example Domain</span></td>
+                    <td><span></span></td>
+                    <td><span class="col-2">22-04-2022 17:46</span></td>
+                </tr>
                 </tbody>
             </table>
 

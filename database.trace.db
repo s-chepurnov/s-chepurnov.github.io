@@ -125,3 +125,52 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /home/sergey/rep
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:444)
 	... 110 more
+2022-04-20 20:24:39 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "URL_CHECK" not found; SQL statement:
+select t0.url_id, t0.id, t0.status_code, t0.title, t0.h1, t0.url_id, t0.created_at from url_check t0 where (t0.url_id) in (?) [42102-210]
+2022-04-20 20:34:34 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "URL_CHECK" not found; SQL statement:
+select t0.url_id, t0.id, t0.status_code, t0.title, t0.h1, t0.url_id, t0.created_at from url_check t0 where (t0.url_id) in (?) [42102-210]
+2022-04-20 20:45:22 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "URL_CHECK" not found; SQL statement:
+select t0.url_id, t0.id, t0.status_code, t0.title, t0.h1, t0.url_id, t0.created_at from url_check t0 where (t0.url_id) in (?) [42102-210]
+2022-04-20 20:57:32 database: wrong user or password; user: ""
+org.h2.message.DbException: Wrong user name or password [28000-210]
+	at org.h2.message.DbException.get(DbException.java:227)
+	at org.h2.message.DbException.get(DbException.java:203)
+	at org.h2.message.DbException.get(DbException.java:192)
+	at org.h2.engine.Engine.openSession(Engine.java:154)
+	at org.h2.engine.Engine.openSession(Engine.java:222)
+	at org.h2.engine.Engine.createSession(Engine.java:201)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:338)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:122)
+	at org.h2.Driver.connect(Driver.java:59)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:681)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:252)
+	at hexlet.code.App.main(App.java:39)
+Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Wrong user name or password [28000-210]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:529)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:496)
+	... 12 more
+2022-04-20 20:58:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Schema "DATABASE" not found; SQL statement:
+DROP SCHEMA database [90079-210]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:651)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:496)
+	at org.h2.message.DbException.get(DbException.java:227)
+	at org.h2.message.DbException.get(DbException.java:203)
+	at org.h2.command.ddl.DropSchema.update(DropSchema.java:44)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:174)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:252)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
+	at hexlet.code.App.main(App.java:46)
+2022-04-20 20:59:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "URL_CHECK" not found; SQL statement:
+DROP table url_check [42102-210]
+2022-04-20 21:00:14 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "URL" not found; SQL statement:
+select t0.id, t0.name, t0.created_at from url t0 order by t0.id limit 10 [42102-210]
+2022-04-20 21:05:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DROP SCHEMA [*]default"; expected "identifier"; SQL statement:
+DROP SCHEMA default [42001-210]
