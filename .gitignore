@@ -6,3 +6,6 @@ build
 
 #ignore IDEA
 .idea/
+
+database.trace.db
+database.mv.db
